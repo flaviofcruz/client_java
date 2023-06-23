@@ -93,16 +93,9 @@ public abstract class Collector {
       List<Sample> mungedSamples = samples;
       // Deal with _total from pre-OM automatically.
       if (type == Type.COUNTER) {
-        if (name.endsWith("_total")) {
-          name = name.substring(0, name.length() - 6);
-        }
-        String withTotal = name + "_total";
         mungedSamples = new ArrayList<Sample>(samples.size());
         for (Sample s: samples) {
           String n = s.name;
-          if (name.equals(n)) {
-            n = withTotal;
-          }
           mungedSamples.add(new Sample(n, s.labelNames, s.labelValues, s.value, s.exemplar, s.timestampMs));
         }
       }
@@ -153,7 +146,6 @@ public abstract class Collector {
       switch (type) {
         case COUNTER:
           return new String[]{
-                  name + "_total",
                   name + "_created",
                   name
           };

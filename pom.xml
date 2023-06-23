@@ -5,7 +5,7 @@
 
     <groupId>io.prometheus</groupId>
     <artifactId>parent</artifactId>
-    <version>0.16.1-SNAPSHOT</version>
+    <version>0.16.1-databricks</version>
 
     <name>Prometheus Java Suite</name>
     <url>http://github.com/prometheus/client_java</url>
@@ -39,30 +39,12 @@
     <modules>
         <module>simpleclient</module>
         <module>simpleclient_common</module>
-        <module>simpleclient_caffeine</module>
         <module>simpleclient_dropwizard</module>
-        <module>simpleclient_graphite_bridge</module>
-        <module>simpleclient_hibernate</module>
-        <module>simpleclient_guava</module>
-        <module>simpleclient_hotspot</module>
-        <module>simpleclient_httpserver</module>
-        <module>simpleclient_log4j</module>
-        <module>simpleclient_log4j2</module>
-        <module>simpleclient_logback</module>
         <module>simpleclient_pushgateway</module>
         <module>simpleclient_servlet</module>
         <module>simpleclient_servlet_common</module>
-        <module>simpleclient_servlet_jakarta</module>
-        <module>simpleclient_spring_web</module>
-        <module>simpleclient_spring_boot</module>
-        <module>simpleclient_jetty</module>
-        <module>simpleclient_jetty_jdk8</module>
         <module>simpleclient_tracer</module>
-        <module>simpleclient_vertx</module>
-        <module>simpleclient_vertx4</module>
         <module>simpleclient_bom</module>
-        <module>benchmarks</module>
-        <module>integration_tests</module>
     </modules>
 
     <properties>
@@ -70,17 +52,26 @@
     </properties>
 
     <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
+      <snapshotRepository>
+        <id>databricks-prometheus-simple-client-snapshot</id>
+        <url>s3://databricks-build-artifacts-manual-staging/maven/snapshot</url>
+        <layout>default</layout>
+      </snapshotRepository>
+      <repository>
+        <id>databricks-prometheus-simple-client-release</id>
+        <name>Release Repository</name>
+        <url>s3://databricks-build-artifacts-manual-staging/maven/release</url>
+      </repository>
     </distributionManagement>
 
     <build>
+      <extensions>
+        <extension>
+          <groupId>com.github.seahen</groupId>
+          <artifactId>maven-s3-wagon</artifactId>
+          <version>1.3.3</version>
+        </extension>
+      </extensions>
         <pluginManagement>
             <plugins>
                 <!-- Add plugin versions for reproducible builds. Versions for default bindings are taken from -->

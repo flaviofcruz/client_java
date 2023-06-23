@@ -72,9 +72,6 @@ public class TextFormat {
       String name = metricFamilySamples.name;
       writer.write("# HELP ");
       writer.write(name);
-      if (metricFamilySamples.type == Collector.Type.COUNTER) {
-        writer.write("_total");
-      }
       if (metricFamilySamples.type == Collector.Type.INFO) {
         writer.write("_info");
       }
@@ -84,9 +81,6 @@ public class TextFormat {
 
       writer.write("# TYPE ");
       writer.write(name);
-      if (metricFamilySamples.type == Collector.Type.COUNTER) {
-        writer.write("_total");
-      }
       if (metricFamilySamples.type == Collector.Type.INFO) {
         writer.write("_info");
       }

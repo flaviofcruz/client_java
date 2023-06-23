@@ -10,7 +10,8 @@ class Environment {
     private static final boolean includeCreatedSeries = !isTrue(DISABLE_CREATED_SERIES);
 
     static boolean includeCreatedSeries() {
-        return includeCreatedSeries;
+        // Customized for Databricks.
+        return false;
     }
 
     private static boolean isTrue(String envVarName) {
